@@ -1,0 +1,286 @@
+$height: 3rem;
+$font-bold: 700;
+
+:root {
+  --color-default: #4e1116;
+  --color-black: #000;
+  --color-white: #fff;
+
+  --h1: 2.5rem;
+  --h2: 1.5rem;
+
+  --font-small: 0.8rem;
+  --font-normal: 1rem;
+  --font-family: "Poppins", sans-serif;
+
+  --z-back: -10;
+  --z-normal: 1;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-modal: 1000;
+
+  @media screen and (min-width: 768px) {
+    --h1: 4.5rem;
+    --h2: 2.5rem;
+
+    --font-small: 1.35rem;
+    --font-normal: 1rem;
+  }
+}
+
+/** Base **/
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: $height 0 0 0;
+  font-family: var(--font-family);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-weight: $font-bold;
+  overflow: hidden;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+//Layout
+
+.grid {
+  max-width: 1200px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  background-color: var(--color-black);
+}
+
+.nav {
+  height: $height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: $font-bold;
+
+  &__logo {
+    font-size: var(--font-normal);
+    color: var(--color-white);
+  }
+
+  &__menu {
+    @media screen and (max-width: 768px) {
+      position: fixed;
+      top: -100%;
+      left: 0;
+      background-image: linear-gradient(
+        var(--color-black),
+        var(--color-default)
+      );
+      width: 100%;
+      height: 45%;
+      padding: 1.5rem;
+      border-radius: 0 0 1rem 1rem;
+      transition: 0.5s;
+    }
+  }
+
+  &__list {
+    text-align: center;
+  }
+
+  &__item {
+    margin-bottom: 1.5rem;
+  }
+
+  &__link {
+    color: var(--color-white);
+
+    &:hover {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 0.1875rem;
+        left: 0.125rem;
+        top: 2.125rem;
+        background-color: var(--color-default);
+      }
+    }
+  }
+
+  &__toggle {
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+}
+
+.main {
+  height: calc(100vh - #{$height});
+  background-color: var(--color-black);
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content max-content;
+  align-content: space-around;
+  row-gap: 2.5rem;
+  height: 100%;
+  font-weight: $font-bold;
+
+  &__info {
+    padding-left: 1.5rem;
+    border-left: 5px solid var(--color-white);
+    z-index: var(--z-tooltip);
+  }
+
+  &__intro {
+    font-size: var(--font-small);
+  }
+
+  &__title {
+    font-size: var(--h1);
+  }
+
+  &__skills {
+    font-size: var(--h2);
+  }
+
+  &__profile {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 290px;
+  }
+
+  &__btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--color-white);
+    padding: 0.625rem 1rem;
+    background-image: linear-gradient(
+      to right,
+      var(--color-black),
+      var(--color-default)
+    );
+  }
+
+  &__social {
+    display: flex;
+
+    padding-bottom: 1rem;
+
+    a {
+      display: flex;
+      margin-right: 2rem;
+      cursor: pointer;
+      font-size: 1.25rem;
+
+      border-radius: 50%;
+      border: 2px solid #fff;
+      padding: 10px;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        border-color: lighten($color: #fff, $amount: 0.2);
+        color: var(--color-default);
+      }
+    }
+  }
+}
+
+.show {
+  top: $height;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    margin: 0;
+  }
+
+  .main {
+    height: 100vh;
+  }
+
+  .nav {
+    height: $height + 1rem;
+
+    &__list {
+      display: flex;
+      padding: 0;
+    }
+
+    &__item {
+      margin-left: 3rem;
+      margin-bottom: 0;
+    }
+
+    &__toggle {
+      display: none;
+    }
+  }
+
+  .home {
+    grid-template-rows: max-content 20px;
+    align-items: center;
+
+    &__info {
+      margin-top: 2rem;
+    }
+
+    &__social {
+      flex-direction: row;
+      padding-top: 8rem;
+      padding-bottom: 0;
+
+      a {
+        margin-right: 2rem;
+        margin-bottom: 0;
+      }
+    }
+
+    &__profile {
+      width: 600px;
+      right: 7%;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .grid {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
